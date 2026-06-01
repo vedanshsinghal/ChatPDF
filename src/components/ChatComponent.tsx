@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import { useChat } from '@ai-sdk/react' 
-import { DefaultChatTransport } from 'ai' // <-- MUST IMPORT THIS
+import { DefaultChatTransport } from 'ai'
 import { Send } from 'lucide-react'
 import MessageList from './MessageList'
 
@@ -21,7 +21,7 @@ const ChatComponent = ({ chatId, initialMessages }: Props) => {
   // 2. Setup useChat with the new DefaultChatTransport architecture
   const { messages, setMessages, sendMessage, status } = useChat({
     id: chatId.toString(),
-    initialMessages,
+    messages: initialMessages,
     transport: new DefaultChatTransport({
       api: '/api/chat',
       // This is how we send custom data (like chatId) to the backend in v6!
@@ -46,7 +46,7 @@ const ChatComponent = ({ chatId, initialMessages }: Props) => {
     }
   }, [initialMessages, messages.length, setMessages]);
 
-  // Elliott's auto-scroll logic
+  // Auto-scroll logic
   useEffect(() => {
     const messageContainer = document.getElementById("message-container");
     if (messageContainer) {
@@ -76,7 +76,6 @@ const ChatComponent = ({ chatId, initialMessages }: Props) => {
       {/* Message List */}
       <MessageList 
         messages={messages} 
-        // status is 'ready', 'submitted', 'streaming', or 'error'
         isLoading={status === 'submitted' || status === 'streaming'} 
       />
 
