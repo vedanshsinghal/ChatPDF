@@ -4,9 +4,7 @@ import { useChat } from '@ai-sdk/react'
 import { DefaultChatTransport } from 'ai'
 import { Send } from 'lucide-react'
 import MessageList from './MessageList'
-
 import { type UIMessage as Message } from 'ai'
-
 type Props = {
   chatId: number;
   initialMessages?: Message[];
