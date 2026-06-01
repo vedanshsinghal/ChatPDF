@@ -53,6 +53,7 @@ const ChatPage = async ({params}:Props) => {
     id: msg.id.toString(),
     role: msg.role === "system" ? "assistant" as const : "user" as const,
     content: msg.content,
+    parts: [], // Vercel AI SDK v6 requires this property
     createdAt: msg.createdAt,
   }));
   console.log(`[DEBUG] Fetched ${formattedMessages.length} messages for chat ${chatId} from Neon.`);
